@@ -1,6 +1,9 @@
 import { useLogin } from "@refinedev/core";
 import { useEffect, useRef } from "react";
 
+//logo
+import {nestfinders} from '../assets'
+
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -26,7 +29,7 @@ export const Login: React.FC = () => {
       try {
         window.google.accounts.id.initialize({
           ux_mode: "popup",
-          client_id: GOOGLE_CLIENT_ID,
+          client_id:process.env.REACT_APP_GOOGLE_CLIENT_ID ,
           callback: async (res: CredentialResponse) => {
             if (res.credential) {
               login(res);
@@ -47,6 +50,7 @@ export const Login: React.FC = () => {
   };
 
   return (
+    <Box component="div" sx={{ backgroundColor: "#FCFCFC" }}>
     <Container
       style={{
         height: "100vh",
@@ -56,31 +60,27 @@ export const Login: React.FC = () => {
       }}
     >
       <Box
+        
         display="flex"
         gap="36px"
         justifyContent="center"
         flexDirection="column"
       >
-        <ThemedTitleV2
-          collapsed={false}
-          wrapperStyles={{
-            fontSize: "22px",
-            justifyContent: "center",
-          }}
-        />
-
+        
+  <img
+            style={{ padding: "0 5px" }}
+            alt="Google"
+            src={nestfinders}
+          />
         <GoogleButton />
 
         <Typography align="center" color={"text.secondary"} fontSize="12px">
           Powered by
-          <img
-            style={{ padding: "0 5px" }}
-            alt="Google"
-            src="https://refine.ams3.cdn.digitaloceanspaces.com/superplate-auth-icons%2Fgoogle.svg"
-          />
+          
           Google
         </Typography>
       </Box>
     </Container>
+    </Box>
   );
 };
